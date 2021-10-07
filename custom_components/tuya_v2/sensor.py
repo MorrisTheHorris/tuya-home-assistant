@@ -65,6 +65,7 @@ TUYA_SUPPORT_TYPE = [
     "xxj",  # Diffuser
     "zndb",  # Smart Electricity Meter
     "wnykq", # Smart IR
+    "szjqr",  # Fingerbot
 ]
 
 # Smoke Detector

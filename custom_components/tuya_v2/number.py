@@ -26,6 +26,7 @@ _LOGGER = logging.getLogger(__name__)
 TUYA_SUPPORT_TYPE = {
     "hps",  # Human Presence Sensor
     "kfj",  # Coffee Maker
+    "szjqr",  # Fingerbot
 }
 
 # Switch(kg), Socket(cz), Power Strip(pc)
@@ -40,6 +41,22 @@ DPCODE_WATERSET = "water_set"
 DPCODE_POWDERSET = "powder_set"
 DPCODE_CLOUDRECIPE = "cloud_recipe_number"
 
+# Fingerbot
+DPCODE_ARM_DOWN_PERCENT = "arm_down_percent"
+DPCODE_ARM_UP_PERCENT = "arm_up_percent"
+DPCODE_CLICK_SUSTAIN_TIME = "click_sustain_time"
+
+AUTO_GENERATE_DP_LIST = [
+    DPCODE_SENSITIVITY,
+    DPCODE_TEMPSET,
+    DPCODE_WARMTIME,
+    DPCODE_WATERSET,
+    DPCODE_POWDERSET,
+    DPCODE_CLOUDRECIPE,
+    DPCODE_ARM_DOWN_PERCENT,
+    DPCODE_ARM_UP_PERCENT,
+    DPCODE_CLICK_SUSTAIN_TIME,
+]
 
 async def async_setup_entry(
     hass: HomeAssistant, _entry: ConfigEntry, async_add_entities: AddEntitiesCallback
@@ -79,23 +96,9 @@ def _setup_entities(hass: HomeAssistant, device_ids: list):
         if device is None:
             continue
 
-        if DPCODE_SENSITIVITY in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_SENSITIVITY))
-
-        if DPCODE_TEMPSET in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_TEMPSET))
-
-        if DPCODE_WARMTIME in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_WARMTIME))
-
-        if DPCODE_WATERSET in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_WATERSET))
-
-        if DPCODE_POWDERSET in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_POWDERSET))
-
-        if DPCODE_CLOUDRECIPE in device.status:
-            entities.append(TuyaHaNumber(device, device_manager, DPCODE_CLOUDRECIPE))
+        for data_point in AUTO_GENERATE_DP_LIST:
+            if data_point in device.status:
+                entities.append(TuyaHaNumber(device, device_manager, data_point))
 
     return entities
 

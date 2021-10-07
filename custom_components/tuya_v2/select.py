@@ -26,6 +26,7 @@ TUYA_SUPPORT_TYPE = {
     "xxj", # Diffuser
     "kfj", # Coffee Maker
     "sd",  # Vacuum Robot
+    "szjqr",  # Fingerbot
 }
 
 DPCODE_MODE = "mode"

@@ -38,6 +38,7 @@ TUYA_SUPPORT_TYPE = {
     "fs",  # Fan
     "sd",  # Vacuum
     "zndb" "kfj",  # Smart Electricity Meter  # Coffee Maker
+    "szjqr",  # Fingerbot
 }
 
 # Switch(kg), Socket(cz), Power Strip(pc)
